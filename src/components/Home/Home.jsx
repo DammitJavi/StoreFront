@@ -3,10 +3,8 @@ import Card from '../Card/Card.jsx'
 export default function Home( {item} ){
 
     return(
-        <div> 
-            <div className='w-0'>
-                <Card item={item}/>
-            </div>
+        <div className='p-0 content-center bg-current'>
+            <Card item={item}/>
         </div>
     );
 }

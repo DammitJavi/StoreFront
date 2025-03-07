@@ -14,6 +14,8 @@ function App() {
   const [isDark, setIsDark] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(true);
   const [inventoryData, setInventoryData] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+  const [numCartItems, setNumCartItems] = useState(0);
 
   useEffect(() => { fetch('http://localhost:3000/api')
       .then(res => res.json())
@@ -25,22 +27,24 @@ function App() {
     }, [])
 
   return (
-    <div className={isDark ? 'dark' : 'light'}>
+    <div className={`${isDark ? 'dark' : 'light'} min-h-screen `} >
       <BrowserRouter>
-        <NavBar isDark={isDark} setIsDark={setIsDark} />
+        <NavBar isDark={isDark} setIsDark={setIsDark} numCartItems={numCartItems}/>
         <Routes>
 
           <Route  path="/" element= { 
-            <div className="grid grid-cols-5 gap-4 z-0"> { isLoggedIn ? inventoryData && inventoryData.map( item => (
-              <Link key={item.id} state={{item}} to={`/product/${item.id}`}> 
-                <Home item={item} /> 
-              </Link>)): <LoginPage isLoggedIn={isLoggedIn} setIsDark={setLoggedIn} /> } 
+            <div className="grid grid-cols-5 gap-4"> { 
+              isLoggedIn ? inventoryData && inventoryData.map( item => (
+                <Link className='w-0' key={item.id} state={{ item }} to={`/product/${item.id}`}> 
+                  <Home item={item} /> 
+                </Link>)): 
+                <LoginPage isLoggedIn={isLoggedIn} setLoggedIn={setLoggedIn} /> } 
             </div>
           }/>
-
-          <Route path="/product/:id" element={<ProductPage/>}/>
+          
+          <Route path="/product/:id" element={ <ProductPage cartItems={cartItems} numCartItems={numCartItems} setNumCartItems={setNumCartItems}/> }/>
           <Route path="/about" element={<About/>}/>
-          <Route path="/cart" element={<Cart/>}/>
+          <Route path="/cart" element={<Cart cartItems={cartItems}/>}/>
         </Routes>
       </BrowserRouter> 
     </div>

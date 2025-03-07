@@ -26,7 +26,7 @@ pg.connect((err) => {
 //Get Inventory Data
 app.get('/api', async (req, res) => {
     try{
-        const data = await pg.query('SELECT id, product_name, category , price, status FROM Inventory');
+        const data = await pg.query('SELECT id, product_name, category , price, sku, dimensions, status FROM Inventory');
         res.json(data.rows);
     } catch (err) {
         console.error(err);

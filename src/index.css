@@ -3,39 +3,23 @@
 @tailwind utilities;
 
 :root {
-  background-color: #242424;
-  /* line-height: 1.5; */
-  /* font-weight: 400; */
-  
-  /* color: rgba(255, 255, 255, 0.87);
-  
-  /* font-synthesis: none; */
-  /* text-rendering: optimizeLegibility; */
-  /* -webkit-font-smoothing: antialiased; */
-  /* -moz-osx-font-smoothing: grayscale; */
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color-scheme: light dark;
-  --homePage: 165, 238, 220;
-  --navBar: 255,255,255;
-  --textColor: 0,0,0;
-
+  background-color: white;
 }
 
 .light {
   background-color: rgb(165,238,220);
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color-scheme: light dark;
+  color-scheme: light;
   --homePage: 165, 238, 220;
   --navBar: 255,255,255;
   --textColor: 0,0,0;
   --card: 255,255,255;
-
 }
 
 .dark {
   background-color: rgb(108,95,95);
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  color-scheme: light dark;
+  color-scheme: dark;
   --homePage: 108, 95, 95;
   --navBar: 47,44,44;
   --textColor: 242,238,240;
