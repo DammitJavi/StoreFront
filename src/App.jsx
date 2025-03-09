@@ -16,6 +16,7 @@ function App() {
   const [inventoryData, setInventoryData] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [numCartItems, setNumCartItems] = useState(0);
+  const [ index, setIndex ] = useState(-1);
 
   useEffect(() => { fetch('http://localhost:3000/api')
       .then(res => res.json())
@@ -42,9 +43,9 @@ function App() {
             </div>
           }/>
           
-          <Route path="/product/:id" element={ <ProductPage cartItems={cartItems} numCartItems={numCartItems} setNumCartItems={setNumCartItems}/> }/>
+          <Route path="/product/:id" element={ <ProductPage cartItems={cartItems} numCartItems={numCartItems} setNumCartItems={setNumCartItems} index={index} setIndex={setIndex} /> }/>
           <Route path="/about" element={<About/>}/>
-          <Route path="/cart" element={<Cart cartItems={cartItems}/>}/>
+          <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} numCartItems={numCartItems} setNumCartItems={setNumCartItems} isDark={isDark} />}/>
         </Routes>
       </BrowserRouter> 
     </div>

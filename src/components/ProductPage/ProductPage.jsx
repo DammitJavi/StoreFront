@@ -1,13 +1,14 @@
-import { useLocation, useParams, Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
-function handleClick( cartItems, numCartItems, setNumCartItems, item){
+function handleClick( cartItems, numCartItems, setNumCartItems, item, index, setIndex){
+    setIndex((index+=1));
     setNumCartItems(numCartItems+1);
-    cartItems.push({ item })
+    cartItems.push({ item, index })
     console.log(cartItems)
 }
 
-export default function ProductPage( { cartItems, numCartItems ,setNumCartItems} ){
-    // const { id } = useParams();
+export default function ProductPage( { cartItems, numCartItems, setNumCartItems, index, setIndex} ){
+
     const location = useLocation();
     const { item } = location.state || {};
 
@@ -27,13 +28,13 @@ export default function ProductPage( { cartItems, numCartItems ,setNumCartItems}
                     <p> {item.sku} </p>
                     <p> {item.dimensions} </p>
                     <p> {item.status} </p>
-                    <p> {numCartItems} </p>
+                    <p> {Object.keys(cartItems).length} </p>
                 </div>
             </div>
             <div className='text-center m-2 p-2' > 
                 <Link className='border border-textColor rounded p-2' to="/cart">Buy Now</Link>
                 <br/>
-                <button  className="m-3 border border-textColor rounded p-2" onClick={() => handleClick( cartItems, numCartItems, setNumCartItems, item)}> Add to Cart </button>
+                <button  className="m-3 border border-textColor rounded p-2" onClick={() => handleClick( cartItems, numCartItems, setNumCartItems, item, index, setIndex )}> Add to Cart </button>
             </div>
         </div>
     );
