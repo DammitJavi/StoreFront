@@ -3,14 +3,12 @@ import { useEffect, useState } from 'react';
 import trashDark from '../../assets/images/trash-dark.svg'
 import trashLight from '../../assets/images/trash-light.svg'
 
-function deleteFromCart( cartItems, setCartItems, setNumCartItems, index ){
-
+function deleteFromCart( cartItems, setCartItems, index ){
     const updateItems = cartItems.filter(item => item.index !== index );
     setCartItems(updateItems);
-    setNumCartItems(Object.keys(cartItems).length);
 }
 
-export default function Cart ( { cartItems, setCartItems, numCartItems, setNumCartItems, isDark }){
+export default function Cart ( { cartItems, setCartItems, isDark }){
 
     const [ trashImg, setTrashImg ] = useState(null);
 
@@ -24,7 +22,7 @@ export default function Cart ( { cartItems, setCartItems, numCartItems, setNumCa
                                                     <li> {d.item.price} </li>
                                                 </div>
                                                 <div className='pt-3 pl-4'>
-                                                    <button onClick={() => deleteFromCart(cartItems, setCartItems, setNumCartItems, d.index)}><img src={trashImg} className='size-6 scale-90 hover:scale-100' /></button>
+                                                    <button onClick={() => deleteFromCart(cartItems, setCartItems, d.index)}><img src={trashImg} className='size-6 scale-90 hover:scale-100' /></button>
                                                 </div>
                                             </div>);
 
@@ -37,8 +35,8 @@ export default function Cart ( { cartItems, setCartItems, numCartItems, setNumCa
             </div>
             <div className="absolute inset-y-28 right-2 flex ">
                 <div>
-                    <Link to="/">
-                        <button className=" p-2">Proceed to Checkout</button>            
+                    <Link to="/checkout">
+                        <button className="rounded-2xl border border-textColor text-textColor p-2">Proceed to Checkout</button>            
                     </Link>
                 </div>
             </div>

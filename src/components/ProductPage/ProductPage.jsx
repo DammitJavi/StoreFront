@@ -1,13 +1,12 @@
 import { useLocation, Link } from 'react-router-dom'
 
-function handleClick( cartItems, numCartItems, setNumCartItems, item, index, setIndex){
+function handleClick( cartItems, item, index, setIndex){
     setIndex((index+=1));
-    setNumCartItems(numCartItems+1);
     cartItems.push({ item, index })
     console.log(cartItems)
 }
 
-export default function ProductPage( { cartItems, numCartItems, setNumCartItems, index, setIndex} ){
+export default function ProductPage( { cartItems, index, setIndex} ){
 
     const location = useLocation();
     const { item } = location.state || {};
@@ -32,9 +31,10 @@ export default function ProductPage( { cartItems, numCartItems, setNumCartItems,
                 </div>
             </div>
             <div className='text-center m-2 p-2' > 
-                <Link className='border border-textColor rounded p-2' to="/cart">Buy Now</Link>
+                <Link className='border border-textColor rounded p-2' to="/checkout"><button onClick={() => handleClick( cartItems, item, index, setIndex )}> Buy Now</button></Link>
+                    
                 <br/>
-                <button  className="m-3 border border-textColor rounded p-2" onClick={() => handleClick( cartItems, numCartItems, setNumCartItems, item, index, setIndex )}> Add to Cart </button>
+                <button  className="m-3 border border-textColor rounded p-2" onClick={() => handleClick( cartItems, item, index, setIndex )}> Add to Cart </button>
             </div>
         </div>
     );

@@ -12,8 +12,7 @@ app.use(express.json());
 const pg = new Pool({
     user: 'javierrojas',
     host: 'localhost',
-    database: 'StoreFront',
-    password: 'password',
+    database: 'storefront',
     port: 5432,
 });
 
