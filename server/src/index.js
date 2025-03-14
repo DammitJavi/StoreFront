@@ -33,6 +33,25 @@ app.get('/api', async (req, res) => {
     }
 });
 
+
+//Get Product Data
+app.get('/api/product/:id', async (req, res) => {
+    try{
+
+        const result = await pg.query('SELECT id, product_name, category, price, sku, dimensions, status from Inventory WHERE id = $1',[req.params.id]);
+        if (result.rows.length === 0){
+            return res.status(404).json({ message: "Product Not Found."})
+        }
+
+        console.log('object: ', result.rows[0])
+        res.json({ message: 'Received', value: result.rows[0] }); // Send response
+    }
+    catch (err) {
+        console.error(err)
+        res.status(500).send('Server Error')
+    }
+});
+
 app.listen(3000, () => {
     console.log('Server running on port 3000');
 });

@@ -16,9 +16,9 @@ function App() {
   const [isLoggedIn, setLoggedIn] = useState(true);
   const [inventoryData, setInventoryData] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const [ index, setIndex ] = useState(-1);
+  const [index, setIndex] = useState(-1);
 
-  useEffect(() => { fetch('http://localhost:3000/api')
+  useEffect(() => { fetch('http://localhost:3000/api/')
       .then(res => res.json())
       .then(data => {
           setInventoryData(data)
@@ -28,9 +28,9 @@ function App() {
     }, [])
 
   return (
-    <div className={`${isDark ? 'dark' : 'light'} min-h-screen `} >
+    <div className={`${isDark ? 'dark' : 'light'} min-h-screen`} >
       <BrowserRouter>
-        <NavBar isDark={isDark} setIsDark={setIsDark} cartItems={cartItems}/>
+        <NavBar isDark={isDark} setIsDark={setIsDark} cartItems={cartItems} inventoryData={inventoryData} />
         <Routes>
 
           <Route  path="/" element= { 
