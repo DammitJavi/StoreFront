@@ -5,11 +5,13 @@ import Card from '../Card/Card.jsx';
 export default function Board( {board}){
 
     const cardItem = board.map( (item) =>
-        <Link key={item.id} to={`/product/${item.id}`}><Card item = {item}/></Link>
+        <div>
+            <Link className='border contents' key={item.id} to={`/product/${item.id}`}><Card item = {item}/></Link>
+        </div>
     );
 
     return(
-        <div className='flex overflow-scroll content-center'>
+        <div className='flex overflow-scroll content-center '>
             {cardItem}
         </div>
     );

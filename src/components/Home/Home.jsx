@@ -6,7 +6,7 @@ function iterateBoards(catSet){
 
     for( const x of catSet){
         elements.push(
-            <div key={elements.length} className='border border-black m-2 p-2'>
+            <div key={elements.length} className='border border-black rounded-lg m-2 p-2'>
                 <p>{x && x[0].category}</p>
                 <Board board={x}/>
             </div> 
