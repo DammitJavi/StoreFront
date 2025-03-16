@@ -7,7 +7,7 @@ function iterateBoards(catSet){
     for( const x of catSet){
         elements.push(
             <div key={elements.length} className='border border-black rounded-lg m-2 p-2'>
-                <p>{x && x[0].category}</p>
+                <p className="text-3xl">{x && x[0].category}</p>
                 <Board board={x}/>
             </div> 
     )}
@@ -17,7 +17,7 @@ function iterateBoards(catSet){
 export default function Home( {catSet} ){
 
     return(   
-        <div>
+        <div className='text-textColor'>
             {iterateBoards(catSet)}
         </div>
     );
