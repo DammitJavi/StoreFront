@@ -8,6 +8,7 @@ import LoginPage from './components/LoginPage/LoginPage.jsx'
 import Cart from './components/Cart/Cart.jsx'
 import ProductPage from './components/ProductPage/ProductPage.jsx';
 import Checkout from './components/Checkout/Checkout.jsx';
+import NotFound from './components/NotFound/NotFound.jsx';
 
 
 function App() {
@@ -38,14 +39,22 @@ function App() {
 
   return (
     <div className={`${isDark ? 'dark' : 'light'} min-h-screen`} >
+      
       <BrowserRouter>
         <NavBar isDark={isDark} setIsDark={setIsDark} cartItems={cartItems} inventoryData={inventoryData}/>
         <Routes>
+        { isLoggedIn ? (
+          <>
           <Route path="/" element={ <Home catSet={catSet}/> }/>          
           <Route path="/product/:id" element={ <ProductPage cartItems={cartItems} index={index} setIndex={setIndex} /> }/>
           <Route path="/about" element={<About/>}/>
           <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} isDark={isDark}/>}/>
           <Route path="/checkout" element={<Checkout cartItems={cartItems} setCartItems={setCartItems}/>}/>
+          <Route path="*" element={<NotFound/>}/>
+          </>
+        ):(
+          <Route path="*" element={<LoginPage />}/>
+        )}
         </Routes>
       </BrowserRouter> 
     </div>
