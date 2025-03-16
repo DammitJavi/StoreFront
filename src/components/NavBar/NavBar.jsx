@@ -38,7 +38,7 @@ export default function NavBar({ isDark, setIsDark, cartItems, inventoryData }){
     return(
         <div className="bg-navBar">
             <nav className='flex w-full items-center justify-between'>
-                <Link className='contents' to='/'><img className='size-20 scale-90 rounded-full m-2 hover:scale-100' src={profPic} alt="profPic"/> </Link>
+                <Link className='contents' to='/'><img className='size-20 scale-90 rounded-full m-1 ml-8 hover:scale-100' src={profPic} alt="profPic"/> </Link>
                 <SearchBar inventoryData={inventoryData} />
                 <ul className='flex'>
                     <button onClick={() => setIsDark(!isDark)} className=' origin-right scale-90 hover:scale-100 size-16 pt-3'>

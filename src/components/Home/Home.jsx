@@ -1,11 +1,25 @@
-import Card from '../Card/Card.jsx'
+import Board from '../Board/Board.jsx'
 
-export default function Home( {item} ){
+function iterateBoards(catSet){
+    // Elements to add to render.
+    const elements = [];
 
-    return(
-        <div className='p-0 content-center bg-current'>
-            <Card item={item}/>
+    for( const x of catSet){
+        elements.push(
+            <div key={elements.length} className='border border-black m-2 p-2'>
+                <p>{x && x[0].category}</p>
+                <Board board={x}/>
+            </div> 
+    )}
+    return elements
+}
+
+export default function Home( {catSet} ){
+
+    return(   
+        <div>
+            Home
+            {iterateBoards(catSet)}
         </div>
     );
 }
-
