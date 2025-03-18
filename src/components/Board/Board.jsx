@@ -12,7 +12,7 @@ export default function Board( {board}){
     const [display, setDisplay] = useState("flex");
 
     const cardItem = board.map( (item) =>
-        <div className='m-2'>
+        <div className='m-2' key={item.id}>
             <Link className='border contents' key={item.id} to={`/product/${item.id}`}><Card item = {item}/></Link>
         </div>
     );

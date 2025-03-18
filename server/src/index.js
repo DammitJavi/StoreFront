@@ -39,18 +39,39 @@ app.get('/api/product/:id', async (req, res) => {
     try{
 
         const result = await pg.query('SELECT id, product_name, category, price, sku, dimensions, status from Inventory WHERE id = $1',[req.params.id]);
+        
         if (result.rows.length === 0){
             return res.status(404).json({ message: "Product Not Found."})
         }
 
         console.log('object: ', result.rows[0])
-        res.json({ message: 'Received', value: result.rows[0] }); // Send response
+
+        // Send response
+        res.json({ message: 'Received', value: result.rows[0] });
     }
     catch (err) {
         console.error(err)
         res.status(500).send('Server Error')
     }
 });
+
+
+app.post('/api/users/', async (req,res) => {
+    try{
+        console.log(req.body);
+        const { username, email, password } = req.body;
+
+        const userInfoQuery = "INSERT INTO usersdb(username, email, password) VALUES ($1, $2, $3)";
+
+        const result = await pg.query(userInfoQuery, [username, email, password]);
+        console.log("User Added: ", result.rows[0]);
+        res.status(200).json({ message: "User Added:", user: result.rows[0]})
+    }
+    catch(err){
+        console.error(err);
+        res.status(500).json({ error: 'Database Error: User Insert Error'});
+    }
+})
 
 app.listen(3000, () => {
     console.log('Server running on port 3000');
