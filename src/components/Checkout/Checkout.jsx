@@ -6,8 +6,8 @@ export default function Checkout( { cartItems, setCartItems }) {
 
     const listItems = cartItems.map((d)=> <div className="justify-center flex border border-textColor w-48 m-auto list-none p-2 space-y-2" key={d.index}> 
                                                 <div className='p-2'>
-                                                    <li> {d.item.product_name} </li> 
-                                                    <li> {d.item.price} </li>
+                                                    <li> {d.result.value.product_name} </li> 
+                                                    <li> {d.result.value.price} </li>
                                                 </div>
                                             </div>);
     return(
