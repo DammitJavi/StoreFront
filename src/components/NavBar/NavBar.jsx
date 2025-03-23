@@ -13,6 +13,8 @@ import SearchBar from "../SearchBar/SearchBar";
 export default function NavBar({ isDark, setIsDark, cartItems, inventoryData, isLoggedIn }){
 
     const [cartImage, setCartImage] = useState(null);
+
+    const inventory = isLoggedIn ? inventoryData : "";
     
     let cartLength = Object.keys(cartItems).length;
     
@@ -39,7 +41,7 @@ export default function NavBar({ isDark, setIsDark, cartItems, inventoryData, is
         <div className="bg-navBar">
             <nav className='flex items-center justify-between p-1'>
                 <Link className='contents' to='/'><img className='size-20 scale-90 rounded-full m-1 ml-8 hover:scale-100' src={profPic} alt="profPic"/> </Link>
-                <SearchBar inventoryData={inventoryData} />
+                <SearchBar inventoryData={inventory} />
                 <ul className='flex'>
                     <button onClick={() => setIsDark(!isDark)} className=' origin-right scale-90 hover:scale-100 size-16 pt-3'>
                     <img src = {isDark ? sun : moon} />
