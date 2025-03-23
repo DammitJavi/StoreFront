@@ -10,7 +10,7 @@ import cartFullDark from '../../assets/images/shopping-dark-full.svg'
 import cartFullLight from '../../assets/images/shopping-light-full.svg'
 import SearchBar from "../SearchBar/SearchBar";
 
-export default function NavBar({ isDark, setIsDark, cartItems, inventoryData }){
+export default function NavBar({ isDark, setIsDark, cartItems, inventoryData, isLoggedIn }){
 
     const [cartImage, setCartImage] = useState(null);
     
@@ -45,7 +45,8 @@ export default function NavBar({ isDark, setIsDark, cartItems, inventoryData }){
                     <img src = {isDark ? sun : moon} />
                     </button>                    
                     <li className="grid grid-cols-2 ">
-                       <NavLink className={({ isActive }) => ["m-2", "p-2", "pt-4","rounded-xl","border-textColor","bg-none", "scale-90", "text-lg/6", "text-textColor", "hover:scale-100", "font-mono", isActive ? "border" : ""].join(" ")} to='/login'> SignIn </NavLink> 
+                        {isLoggedIn ? ( <NavLink className={({ isActive }) => ["m-2", "p-2", "pt-4","rounded-xl","border-textColor","bg-none", "scale-90", "text-lg/6", "text-textColor", "hover:scale-100", "font-mono", isActive ? "border" : ""].join(" ")} to='/account'> Account </NavLink> )
+                       : ( <NavLink className={({ isActive }) => ["m-2", "p-2", "pt-4","rounded-xl","border-textColor","bg-none", "scale-90", "text-lg/6", "text-textColor", "hover:scale-100", "font-mono", isActive ? "border" : ""].join(" ")} to='/login'> SignIn </NavLink> )}
                        <NavLink className={({ isActive }) => ["border-textColor", "rounded-xl", "bg-none", "mt-2", "scale-90", "px-4", "py-3", "hover:scale-100", isActive ? "border" : ""].join(" ")} to='/cart'> <img src={cartImage} alt="cartImg" className='size-10'/> </NavLink>  
                     </li>
                 </ul>

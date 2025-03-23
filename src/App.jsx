@@ -2,7 +2,7 @@ import { useState , useEffect } from 'react'
 import { BrowserRouter, Routes , Route, Link, data } from 'react-router-dom';
 
 import Home from './components/Home/Home.jsx'
-import About from './components/About/About.jsx'
+import Account from './components/Account/Account.jsx'
 import NavBar from './components/NavBar/NavBar.jsx'
 import LoginPage from './components/LoginPage/LoginPage.jsx'
 import Cart from './components/Cart/Cart.jsx'
@@ -42,24 +42,25 @@ function App() {
     <div className={`${isDark ? 'dark' : 'light'} min-h-screen`} >
       
       <BrowserRouter>
-        <NavBar isDark={isDark} setIsDark={setIsDark} cartItems={cartItems} inventoryData={inventoryData}/>
+        <NavBar isDark={isDark} setIsDark={setIsDark} cartItems={cartItems} inventoryData={inventoryData} isLoggedIn={isLoggedIn}/>
         <Routes>
         { isLoggedIn ? (
           <>
             <Route path="/" element={ <Home catSet={catSet}/> }/>          
             <Route path="/product/:id" element={ <ProductPage cartItems={cartItems} index={index} setIndex={setIndex} /> }/>
-            <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/login" element={ <LoginPage setLoggedIn={setLoggedIn}/> } />
             <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} isDark={isDark}/>}/>
             <Route path="/checkout" element={<Checkout cartItems={cartItems} setCartItems={setCartItems}/>}/>
             <Route path="*" element={<NotFound/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
+            <Route path="/account" element={<Account/>}/>
 
           </>
         ):(
           <>
             <Route path="/signup" element={<SignUpPage/>}/>
-            <Route path="login" element={<LoginPage/>}/>
-            <Route path="*" element={<LoginPage/>}/>
+            <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn}/>}/>
+            <Route path="*" element={<LoginPage setLoggedIn={setLoggedIn}/>}/>
           </>
         )}
         </Routes>
