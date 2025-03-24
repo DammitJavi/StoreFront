@@ -50,7 +50,7 @@ export default function NavBar({ isDark, setIsDark, cartItems, inventoryData, is
                         {isLoggedIn ? ( <NavLink className={({ isActive }) => ["m-2", "p-2", "pt-4","rounded-xl","border-textColor","bg-none", "scale-90", "text-lg/6", "text-textColor", "hover:scale-100", "font-mono", isActive ? "border" : ""].join(" ")} to='/account'> Account </NavLink> )
                        : ( <NavLink className={({ isActive }) => ["m-2", "p-2", "pt-4","rounded-xl","border-textColor","bg-none", "scale-90", "text-lg/6", "text-textColor", "hover:scale-100", "font-mono", isActive ? "border" : ""].join(" ")} to='/login'> SignIn </NavLink> )}
                        <div>
-                        <NavLink className={({ isActive }) => ["absolute", "border-textColor", "rounded-xl", "bg-none", "mt-2", "scale-90", "px-4", "py-3", "hover:scale-100", isActive ? "border" : ""].join(" ")} to='/cart'> <img src={cartImage} alt="cartImg" className='size-12'/>  <p className="right-4 text-xs -top-0 top-3 fixed text-textColor"> { cartItems.length > 0 ?  cartItems.length : "" } </p> </NavLink>
+                        <NavLink className={({ isActive }) => ["absolute", "border-textColor", "rounded-xl", "bg-none", "mt-2", "scale-90", "px-4", "py-3", "hover:scale-100", isActive ? "border" : ""].join(" ")} to='/cart'> <img src={cartImage} alt="cartImg" className='size-12'/>  <p className="right-4 text-xs -top-0 top-3 fixed font-bold text-textColor"> { cartItems.length > 0 ?  cartItems.length : "" } </p> </NavLink>
                        </div>
                     </li>
                 </ul>
