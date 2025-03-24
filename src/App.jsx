@@ -19,6 +19,7 @@ function App() {
   const [inventoryData, setInventoryData] = useState("");
   const [cartItems, setCartItems] = useState([]);
   const [index, setIndex] = useState(-1);
+  const [user, setUser] = useState(null);
 
   useEffect(() => { fetch('http://localhost:3000/api/')
       .then(res => res.json())
@@ -47,20 +48,20 @@ function App() {
         { isLoggedIn ? (
           <>
             <Route path="/" element={ <Home catSet={catSet}/> }/>          
-            <Route path="/product/:id" element={ <ProductPage cartItems={cartItems} index={index} setIndex={setIndex} /> }/>
-            <Route path="/login" element={ <LoginPage setLoggedIn={setLoggedIn}/> } />
+            <Route path="/account" element={<Account user={user} setLoggedIn={setLoggedIn}/>}/>
             <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} isDark={isDark}/>}/>
             <Route path="/checkout" element={<Checkout cartItems={cartItems} setCartItems={setCartItems}/>}/>
-            <Route path="*" element={<NotFound/>}/>
+            <Route path="/login" element={ <LoginPage setLoggedIn={setLoggedIn} setUser={setUser}/> } />
+            <Route path="/product/:id" element={ <ProductPage cartItems={cartItems} index={index} setIndex={setIndex} /> }/>
             <Route path="/signup" element={<SignUpPage/>}/>
-            <Route path="/account" element={<Account/>}/>
+            <Route path="*" element={<NotFound/>}/>
 
           </>
         ):(
           <>
+            <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn} setUser={setUser}/>}/>
             <Route path="/signup" element={<SignUpPage/>}/>
-            <Route path="/login" element={<LoginPage setLoggedIn={setLoggedIn}/>}/>
-            <Route path="*" element={<LoginPage setLoggedIn={setLoggedIn}/>}/>
+            <Route path="*" element={<LoginPage setLoggedIn={setLoggedIn} setUser={setUser}/>}/>
           </>
         )}
         </Routes>

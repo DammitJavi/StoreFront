@@ -1,5 +1,13 @@
-export default function Account (){
+export default function Account ({ user, setLoggedIn }){
+
+    const handleLogOff = () => {
+        setLoggedIn(false);
+    }
+
     return (
-        <div>This is account</div>
+        <div className="text-center">
+            <div>This is {user}</div>
+            <button className="border border-textColor rounded p-1" onClick={handleLogOff}>Log Off</button>
+        </div>
     );
 }

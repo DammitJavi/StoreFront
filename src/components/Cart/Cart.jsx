@@ -26,10 +26,15 @@ export default function Cart ( { cartItems, setCartItems, isDark }){
                                                 </div>
                                             </div>);
 
+    const handleClear = () =>{
+        setCartItems([]);
+    }
+
     return(
         <div className='flex justify-center'>
             <div className="text-textColor text-center border border-textColor space-y-2">
                 <h1>This is Cart!</h1>
+                <button onClick={handleClear}>Clear Cart</button>
                 {listItems}
             
             </div>

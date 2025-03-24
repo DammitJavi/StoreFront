@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 function handleClick( cartItems, result, index, setIndex){
     setIndex((index+=1));
     cartItems.push({ result, index })
-    // console.log(cartItems)
 }
 
 export default function ProductPage( { cartItems, index, setIndex } ){
@@ -44,7 +43,6 @@ export default function ProductPage( { cartItems, index, setIndex } ){
                     <p> {result.value.sku} </p>
                     <p> {result.value.dimensions} </p>
                     <p> {result.value.status} </p>
-                    <p> {Object.keys(cartItems).length} </p>
                 </div>
             </div>
             <div className='text-center m-2 p-2' > 

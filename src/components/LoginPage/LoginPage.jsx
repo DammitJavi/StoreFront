@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 
-export default function LoginPage ( { setLoggedIn } ){
+export default function LoginPage ( { setLoggedIn, setUser } ){
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -42,6 +42,7 @@ export default function LoginPage ( { setLoggedIn } ){
                     setLoggedIn(true);
                     setUserValid(true);
                     setPasswordValid(true);
+                    setUser(username);
                     navigate(`/`);
                 }
                 else{
@@ -69,7 +70,7 @@ export default function LoginPage ( { setLoggedIn } ){
         'bg-white',
         'border',
         'rounded',
-        'pl- 1',
+        'pl-1',
         !userValid ? 'border-red-500 border-2' : 'border-textColor border-1',
     ].join(' ');
 
@@ -77,12 +78,12 @@ export default function LoginPage ( { setLoggedIn } ){
         'bg-white',
         'border',
         'rounded',
-        'pl- 1',
+        'pl-1',
         !passwordValid ? 'border-red-500 border-2' : 'border-textColor border-1',
     ].join(' ');
 
     return (
-        <div className="text-textColor text-center p-10 ">
+        <div className="text-textColor text-center p-10">
             <p> You are not logged in! Please Login. </p>
             <form onSubmit={submitInfo}>
                 <div>
@@ -92,9 +93,11 @@ export default function LoginPage ( { setLoggedIn } ){
                 <div>
                     <input className={inputClassesPassword} value={password} onChange={ e => setPassword(e.target.value)} placeholder='Password'onKeyDown={handleKeyDown} />
                 </div>
-                <button className='border border-textColor rounded' type="submit" >Submit</button>
+                <div className='m-2'>
+                    <button className='border border-textColor rounded p-1' type="submit" >Submit</button>
+                </div>
             </form>
-            <Link to="/signup" >Need an Account? Click Here.</Link>
+            <Link className="hover:underline" to="/signup" >Need an Account? Click Here.</Link>
 
         </div>
     );

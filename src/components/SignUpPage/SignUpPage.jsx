@@ -137,7 +137,9 @@ export default function SignUpPage(){
                 <div>
                     <input className={inputClassesPassword} placeholder="Password" value={password} onChange={ (e) => setPassword(e.target.value)} onKeyDown={handleKeyDown}/>
                 </div>
-                <button className='border border-textColor rounded' type="submit" >Submit</button>
+                <div className='m-2'>
+                    <button className='border border-textColor rounded p-1' type="submit" >Submit</button>
+                </div>
             </form>
         </div>
     );
