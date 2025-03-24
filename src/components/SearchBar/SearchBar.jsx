@@ -24,8 +24,8 @@ export default function SearchBar( { inventoryData } ){
     
 
     return (
-        <div className="w-2/3 pb-8 flex">
-            <input className='w-2/3 size-8 border border-textColor bg-white pl-8 rounded-lg absolute' value={input} onChange={ (e) => handleSearch( e, setResults, setInputs, inventoryData )} type='input' placeholder="Search..."/>
+        <div className="w-2/3 relative pb-8">
+            <input className='w-full size-8 border border-textColor bg-white pl-8 rounded-lg absolute' value={input} onChange={ (e) => handleSearch( e, setResults, setInputs, inventoryData )} type='input' placeholder="Search..."/>
             <button className="pt-1 pl-1 absolute scale-90 hover:scale-100" > <img alt='search' src={searchBar} className="size-6" /> </button>
             <div> 
                 { Object.keys(results).length === 0 ? "" :  (
