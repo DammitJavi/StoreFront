@@ -50,12 +50,14 @@ export default function ProductPage( { itemCount, setItemCount, cartItems} ){
                     <p> {result.value.status} </p>
                 </div>
             </div>
-            <div className='text-center m-2 p-2' > 
-                <Link className='border border-textColor rounded p-2' to="/checkout"><button onClick={() => addToCart( )}> Buy Now</button></Link>
-                    
-                <br/>
-                <button  className="m-3 border border-textColor rounded p-2" onClick={() => addToCart()}> Add to Cart </button>
-            </div>
+            <ul className='text-center m-2 p-2' > 
+                <li className="scale-90 hover:scale-100">
+                    <Link className='border border-textColor rounded p-2' to="/checkout"><button onClick={() => addToCart()}> Buy Now</button></Link>  
+                </li>
+                <li className="scale-90 hover:scale-100">
+                    <button className="m-3 border border-textColor rounded p-2" onClick={() => addToCart()}> Add to Cart </button>
+                </li>
+            </ul>
         </div>
     );
 }
