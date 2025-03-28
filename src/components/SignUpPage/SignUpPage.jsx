@@ -124,7 +124,7 @@ export default function SignUpPage(){
 
       return(
         <div className='text-center text-textColor'>
-            This is Sign Up Page!
+            <p className='p-2'>Sign up here!</p>
             <form onSubmit={handleSubmit}>
                 <div>
                     <input className={inputClassesUsername} placeholder="Username" value={username} onChange={ (e) => setUsername(e.target.value) } onKeyDown={handleKeyDown}/>

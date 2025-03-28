@@ -39,7 +39,6 @@ app.get('/api', async (req, res) => {
     }
 });
 
-
 //Get Product Data
 app.get('/api/product/:id', async (req, res) => {
     try{
@@ -58,6 +57,31 @@ app.get('/api/product/:id', async (req, res) => {
     catch (err) {
         console.error(err)
         res.status(500).send('Server Error')
+    }
+});
+
+app.post('/api/product/', async (req, res) => {
+    try{
+        const { keys } = req.body;
+
+        if(!Array.isArray(keys)){
+            return res.status(400).json({message: "error with array"});
+        }
+        const query = `SELECT id, product_name, category, price, sku, dimensions, status from Inventory WHERE id = ANY($1)`;  
+
+        const result = await pg.query(query, [keys]);
+
+        const productData = {};
+
+        result.rows.forEach( (row) => {
+            productData[row.id] = row;
+        })
+
+        res.json( result.rows )
+
+    }
+    catch(err){
+        console.error(err)
     }
 });
 

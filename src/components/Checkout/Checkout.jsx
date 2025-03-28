@@ -1,15 +1,9 @@
 import { useState } from 'react'
 
-export default function Checkout( { cartItems, setCartItems }) {
+export default function Checkout() {
 
     const [value, setValue] = useState('Example: John')
 
-    const listItems = cartItems.map((d)=> <div className="justify-center flex border border-textColor w-48 m-auto list-none p-2 space-y-2" key={d.index}> 
-                                                <div className='p-2'>
-                                                    <li> {d.result.value.product_name} </li> 
-                                                    <li> {d.result.value.price} </li>
-                                                </div>
-                                            </div>);
     return(
         <div className='text-textColor p-3'>
             <div className=' text-center'>
@@ -69,7 +63,6 @@ export default function Checkout( { cartItems, setCartItems }) {
                     </div>
                 </div>
             </div>
-            {listItems}
             <div className='text-center'>
                 <h1 className="pl-2">Card Number</h1>
 

@@ -15,11 +15,11 @@ import SignUpPage from './components/SignUpPage/SignUpPage.jsx';
 function App() {
   
   const [isDark, setIsDark] = useState(false);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(true);
   const [inventoryData, setInventoryData] = useState("");
-  const [cartItems, setCartItems] = useState([]);
-  const [index, setIndex] = useState(-1);
+  const [itemCount, setItemCount] = useState(0);
   const [user, setUser] = useState(null);
+  const [cartItems, setCartItems] = useState(new Map());
 
   useEffect(() => { fetch('http://localhost:3000/api/')
       .then(res => res.json())
@@ -39,20 +39,21 @@ function App() {
       catSet.add( inventoryData.filter(item => item.category === x))
   }
 
+
   return (
     <div className={`${isDark ? 'dark' : 'light'} min-h-screen`} >
       
       <BrowserRouter>
-        <NavBar isDark={isDark} setIsDark={setIsDark} cartItems={cartItems} inventoryData={inventoryData} isLoggedIn={isLoggedIn}/>
+        <NavBar isDark={isDark} setIsDark={setIsDark} itemCount={itemCount} inventoryData={inventoryData} isLoggedIn={isLoggedIn}/>
         <Routes>
         { isLoggedIn ? (
           <>
             <Route path="/" element={ <Home catSet={catSet}/> }/>          
             <Route path="/account" element={<Account user={user} setLoggedIn={setLoggedIn}/>}/>
-            <Route path="/cart" element={<Cart cartItems={cartItems} setCartItems={setCartItems} isDark={isDark}/>}/>
-            <Route path="/checkout" element={<Checkout cartItems={cartItems} setCartItems={setCartItems}/>}/>
+            <Route path="/cart" element={<Cart itemCount={itemCount} setItemCount={setItemCount} isDark={isDark} cartItems={cartItems} setCartItems={setCartItems}/>}/>
+            <Route path="/checkout" element={<Checkout/>}/>
             <Route path="/login" element={ <LoginPage setLoggedIn={setLoggedIn} setUser={setUser}/> } />
-            <Route path="/product/:id" element={ <ProductPage cartItems={cartItems} index={index} setIndex={setIndex} /> }/>
+            <Route path="/product/:id" element={ <ProductPage itemCount={itemCount} setItemCount={setItemCount} cartItems={cartItems} /> }/>
             <Route path="/signup" element={<SignUpPage/>}/>
             <Route path="*" element={<NotFound/>}/>
 

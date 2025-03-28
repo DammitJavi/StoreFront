@@ -1,15 +1,20 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-function handleClick( cartItems, result, index, setIndex){
-    setIndex((index+=1));
-    cartItems.push({ result, index })
-}
 
-export default function ProductPage( { cartItems, index, setIndex } ){
-
+export default function ProductPage( { itemCount, setItemCount, cartItems} ){
+    
     const { id } = useParams();
     const [result, setResult] = useState(null);
+    
+    const addToCart = () => {
+
+        setItemCount((itemCount+=1));
+        const quantity = !cartItems.has(result.value.id) ? 1 : (cartItems.get(result.value.id) + 1)
+        cartItems.set( result.value.id , quantity );
+
+    }
+
 
     useEffect(() => {
         const serverData = async () => {
@@ -46,10 +51,10 @@ export default function ProductPage( { cartItems, index, setIndex } ){
                 </div>
             </div>
             <div className='text-center m-2 p-2' > 
-                <Link className='border border-textColor rounded p-2' to="/checkout"><button onClick={() => handleClick( cartItems, result, index, setIndex )}> Buy Now</button></Link>
+                <Link className='border border-textColor rounded p-2' to="/checkout"><button onClick={() => addToCart( )}> Buy Now</button></Link>
                     
                 <br/>
-                <button  className="m-3 border border-textColor rounded p-2" onClick={() => handleClick( cartItems, result, index, setIndex )}> Add to Cart </button>
+                <button  className="m-3 border border-textColor rounded p-2" onClick={() => addToCart()}> Add to Cart </button>
             </div>
         </div>
     );

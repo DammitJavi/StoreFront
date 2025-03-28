@@ -6,7 +6,7 @@ export default function Account ({ user, setLoggedIn }){
 
     return (
         <div className="text-center">
-            <div>This is {user}</div>
+            <div>Hello {user}</div>
             <button className="border border-textColor rounded p-1" onClick={handleLogOff}>Log Off</button>
         </div>
     );

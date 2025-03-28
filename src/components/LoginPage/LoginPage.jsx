@@ -84,7 +84,7 @@ export default function LoginPage ( { setLoggedIn, setUser } ){
 
     return (
         <div className="text-textColor text-center p-10">
-            <p> You are not logged in! Please Login. </p>
+            <p className='p-2'> You are not logged in! Please Login. </p>
             <form onSubmit={submitInfo}>
                 <div>
                     <input className={inputClassesUsername} value={username} onChange={ e => setUsername(e.target.value)} placeholder='Username' onKeyDown={handleKeyDown} />
