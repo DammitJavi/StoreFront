@@ -4,15 +4,30 @@ import trashDark from '../../assets/images/trash-dark.svg'
 import trashLight from '../../assets/images/trash-light.svg'
 
 
-export default function Cart ( { itemCount, setItemCount, isDark, cartItems }){
-    
-    function deleteFromCart(){
-    // const updateItems = cartItems.filter(item => item.index !== index );
-    // setCartItems(updateItems);
-    }
+export default function Cart ( { itemCount, setItemCount, isDark, cartItems, setCartItems}){
 
     const [ trashImg, setTrashImg ] = useState(null);
     const [ itemSet, setItemSet ] = useState([]);
+
+
+
+    
+    const deleteFromCart = ( id ) => {
+        const newMap = new Map(cartItems);
+        const newValue = newMap.get(id) - 1;
+
+        if(newValue > 0 ){
+            newMap.set(id, newValue)
+        }
+        else{
+            newMap.delete(id);
+            const newItemSet = itemSet.filter(item => item.id !== id);
+            setItemSet(newItemSet);
+        }
+        
+        setItemCount(itemCount-=1);
+        setCartItems(newMap);
+    }
 
     useEffect(() => {
         (isDark ? setTrashImg(trashDark) : setTrashImg(trashLight) )
@@ -38,13 +53,6 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems }){
         dataFetch();
 
     },[]);
-
-    const handleDelete = () => {
-
-        const quantity = cartItems.get(result.value) === 1 ? cartItems.delete(result) : (cartItems.get(result.value) - 1)
-        cartItems.set(result.value, quantity );
-
-    }
     
     const handleClear = () =>{
         setItemCount(0);
@@ -64,7 +72,7 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems }){
                     {cartItems.get(id)}
 
                     <div className='pt-3 pl-4'>
-                        <button onClick={() => deleteFromCart()}><img src={trashImg} className='size-6 scale-90 hover:scale-100' /></button>
+                        <button onClick={() => deleteFromCart(id)}><img src={trashImg} className='size-6 scale-90 hover:scale-100' /></button>
                     </div>
                 </div>
             )
@@ -77,7 +85,10 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems }){
             <div className="text-textColor text-center border border-textColor">
                 <h1>{ itemCount === 0 ? "Cart is empty!" : " "}</h1>
                 <button onClick={handleClear}>Clear Cart</button>
-                {myItems()}
+                <div>
+                    {myItems()}
+                </div>
+                    
             </div>
             <div className="absolute inset-y-28 right-2 flex ">
                 <div>
