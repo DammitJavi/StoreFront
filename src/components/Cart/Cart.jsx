@@ -4,14 +4,9 @@ import trash from '../../assets/images/trash.svg';
 import plus from '../../assets/images/plus.svg';
 import minus from '../../assets/images/minus.svg';
 
-
-
 export default function Cart ( { itemCount, setItemCount, isDark, cartItems, setCartItems}){
 
-    const [ trashImg, setTrashImg ] = useState(null);
     const [ itemSet, setItemSet ] = useState([]);
-    const [ minusSign, setMinusSign] = useState(null);
-
 
     const addToCart = ( id ) => {
         const newMap = new Map(cartItems);
@@ -70,12 +65,12 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
     }
 
     const minusClass = [
-        "size-6","scale-90", "hover:scale-100",
+        "size-5","scale-90", "hover:scale-100", "m-2",
         isDark ? 'invert' : '',
     ].join(' ');
 
     const plusClass = [
-        "size-6","scale-90", "hover:scale-100",
+        "size-5","scale-90", "hover:scale-100", "m-2",
         isDark ? 'invert' : '',
     ].join(' ');
 
@@ -88,13 +83,11 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
             elements.push(
                 <div className='border border-textColor' key={id}>
                     {e.product_name}
-                    <br/>
-                    {cartItems.get(id)}
 
-                    <div className='pt-3 pl-4'>
+                    <div className='pt-3 flex content-center'>
                         <button onClick={() => deleteFromCart(id)}><img src={cartItems.get(id) === 1 ? trash : minus} className={minusClass} /></button>
+                        <div className='pt-1 size-3 text-lg'>{cartItems.get(id)}</div>
                         <button onClick={() => addToCart(id)}><img src={plus} className={plusClass} /></button>
-
                     </div>
                 </div>
             )
