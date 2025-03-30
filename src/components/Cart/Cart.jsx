@@ -1,17 +1,26 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import trashDark from '../../assets/images/trash-dark.svg'
-import trashLight from '../../assets/images/trash-light.svg'
+import trash from '../../assets/images/trash.svg';
+import plus from '../../assets/images/plus.svg';
+import minus from '../../assets/images/minus.svg';
+
 
 
 export default function Cart ( { itemCount, setItemCount, isDark, cartItems, setCartItems}){
 
     const [ trashImg, setTrashImg ] = useState(null);
     const [ itemSet, setItemSet ] = useState([]);
+    const [ minusSign, setMinusSign] = useState(null);
 
 
+    const addToCart = ( id ) => {
+        const newMap = new Map(cartItems);
+        const newValue = newMap.get(id) + 1;
+        newMap.set(id, newValue);
+        setItemCount(itemCount+=1);
+        setCartItems(newMap);
+    }
 
-    
     const deleteFromCart = ( id ) => {
         const newMap = new Map(cartItems);
         const newValue = newMap.get(id) - 1;
@@ -30,7 +39,7 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
     }
 
     useEffect(() => {
-        (isDark ? setTrashImg(trashDark) : setTrashImg(trashLight) )
+
         const dataFetch = async () => {
             try{
                 const keys = Array.from(cartItems.keys());
@@ -60,6 +69,17 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
         setItemSet([]);
     }
 
+    const minusClass = [
+        "size-6","scale-90", "hover:scale-100",
+        isDark ? 'invert' : '',
+    ].join(' ');
+
+    const plusClass = [
+        "size-6","scale-90", "hover:scale-100",
+        isDark ? 'invert' : '',
+    ].join(' ');
+
+
     const myItems = () => {
 
         const elements = [];
@@ -72,7 +92,9 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
                     {cartItems.get(id)}
 
                     <div className='pt-3 pl-4'>
-                        <button onClick={() => deleteFromCart(id)}><img src={trashImg} className='size-6 scale-90 hover:scale-100' /></button>
+                        <button onClick={() => deleteFromCart(id)}><img src={cartItems.get(id) === 1 ? trash : minus} className={minusClass} /></button>
+                        <button onClick={() => addToCart(id)}><img src={plus} className={plusClass} /></button>
+
                     </div>
                 </div>
             )
