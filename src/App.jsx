@@ -20,6 +20,8 @@ function App() {
   const [itemCount, setItemCount] = useState(0);
   const [user, setUser] = useState(null);
   const [cartItems, setCartItems] = useState(new Map());
+  const [cartTotal, setCartTotal] = useState(0);
+
 
   useEffect(() => { fetch('http://localhost:3000/api/')
       .then(res => res.json())
@@ -50,8 +52,8 @@ function App() {
           <>
             <Route path="/" element={ <Home catSet={catSet}/> }/>          
             <Route path="/account" element={<Account user={user} setLoggedIn={setLoggedIn}/>}/>
-            <Route path="/cart" element={<Cart itemCount={itemCount} setItemCount={setItemCount} isDark={isDark} cartItems={cartItems} setCartItems={setCartItems}/>}/>
-            <Route path="/checkout" element={<Checkout/>}/>
+            <Route path="/cart" element={<Cart itemCount={itemCount} setItemCount={setItemCount} isDark={isDark} cartItems={cartItems} setCartItems={setCartItems} setCartTotal={setCartTotal}/>}/>
+            <Route path="/checkout" element={<Checkout cartTotal={cartTotal}/>}/>
             <Route path="/login" element={ <LoginPage setLoggedIn={setLoggedIn} setUser={setUser}/> } />
             <Route path="/product/:id" element={ <ProductPage itemCount={itemCount} setItemCount={setItemCount} cartItems={cartItems} /> }/>
             <Route path="/signup" element={<SignUpPage/>}/>

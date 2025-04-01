@@ -4,9 +4,11 @@ import trash from '../../assets/images/trash.svg';
 import plus from '../../assets/images/plus.svg';
 import minus from '../../assets/images/minus.svg';
 
-export default function Cart ( { itemCount, setItemCount, isDark, cartItems, setCartItems}){
+export default function Cart ( { itemCount, setItemCount, isDark, cartItems, setCartItems, cartTotal, setCartTotal}){
 
     const [ itemSet, setItemSet ] = useState([]);
+    var total = 0;
+    var isCartEmpty = itemCount === 0 ? true : false;
 
     const addToCart = ( id ) => {
         const newMap = new Map(cartItems);
@@ -55,7 +57,6 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
             }
         };
         dataFetch();
-
     },[]);
     
     const handleClear = () =>{
@@ -64,8 +65,12 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
         setItemSet([]);
     }
 
+    const handleTotal = () => {
+        setCartTotal(total.toFixed(2));
+    }
+
     const minusClass = [
-        "size-5","scale-90", "hover:scale-100", "m-2",
+        "size-5","scale-100", "hover:scale-110", "m-2",
         isDark ? 'invert' : '',
     ].join(' ');
 
@@ -74,44 +79,60 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
         isDark ? 'invert' : '',
     ].join(' ');
 
-
     const myItems = () => {
 
         const elements = [];
         itemSet.forEach( e => {
+
             var id = e.id
+            total += (cartItems.get(id) * e.price);
+            
             elements.push(
                 <div className='border border-textColor' key={id}>
-                    {e.product_name}
-
-                    <div className='pt-3 flex content-center'>
+                    <div className='m-3'>
+                        {e.product_name}
+                        <br/>
+                        {e.price}
+                    </div>
+                    <div className='flex m-7 border-2 border-checkout rounded-2xl'>
                         <button onClick={() => deleteFromCart(id)}><img src={cartItems.get(id) === 1 ? trash : minus} className={minusClass} /></button>
                         <div className='pt-1 size-3 text-lg'>{cartItems.get(id)}</div>
-                        <button onClick={() => addToCart(id)}><img src={plus} className={plusClass} /></button>
+                        <button onClick={() => addToCart(id)}><div className=' fill-textColor'><img src={plus} className={plusClass} /></div></button>
+                        
+                        {/* Code below is for an SVG image as a React component, testing color on images */}
+                        {/* <button onClick={() => addToCart(id)}><div className='m-2'><PlusIcon /></div></button> */}
+
                     </div>
                 </div>
             )
         })
+
         return elements
-}
+    }
 
     return(
         <div className='flex justify-center'>
             <div className="text-textColor text-center border border-textColor">
-                <h1>{ itemCount === 0 ? "Cart is empty!" : " "}</h1>
-                <button onClick={handleClear}>Clear Cart</button>
+                <h1>{ isCartEmpty ? "Cart is empty!" : " "}</h1>
+                { isCartEmpty ? "" :  <button onClick={handleClear}>Clear Cart</button>}
                 <div>
                     {myItems()}
                 </div>
                     
             </div>
-            <div className="absolute inset-y-28 right-2 flex ">
-                <div>
-                    <Link to="/checkout">
-                        <button className="rounded-2xl border border-textColor text-textColor p-2">Proceed to Checkout</button>            
+
+            { !isCartEmpty ? <div className=" bg-navBar rounded-xl border border-textColor absolute inset-y-28 right-2 h-1/6">
+                <div className='m-2'>
+                    <p className='text-textColor'>{ isCartEmpty ? "" : "Total: $" + total.toFixed(2)}</p>
+                </div>
+
+                <div className='m-2'>
+                    <Link to="/checkout" onClick={()=>handleTotal()}>
+                        <button className="rounded-2xl border bg-checkout border-textColor text-textColor p-2 scale-100 hover:scale-105">Proceed to Checkout</button>            
                     </Link>
                 </div>
-            </div>
+            </div> : ""}
+
         </div>
     );
 }

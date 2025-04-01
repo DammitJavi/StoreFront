@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-export default function Checkout() {
+export default function Checkout({ cartTotal }) {
 
     const [value, setValue] = useState('Example: John')
-
+    console.log(cartTotal);
     return(
         <div className='text-textColor p-3'>
             <div className=' text-center'>

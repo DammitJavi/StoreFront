@@ -12,7 +12,8 @@ export default {
         homePage: "rgb(var(--homePage))",
         navBar: "rgb(var(--navBar))",
         textColor: "rgb(var(--textColor))",
-        card: "rgb(var(--card))"
+        card: "rgb(var(--card))",
+        checkout: "rgb(var(--checkout))"
       }, 
     },
   },
