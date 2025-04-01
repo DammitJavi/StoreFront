@@ -43,7 +43,7 @@ app.get('/api', async (req, res) => {
 app.get('/api/product/:id', async (req, res) => {
     try{
 
-        const result = await pg.query('SELECT id, product_name, category, price, sku, dimensions, status from Inventory WHERE id = $1',[req.params.id]);
+        const result = await pg.query('SELECT id, product_name, category, price, sku, supplier, dimensions, status from Inventory WHERE id = $1',[req.params.id]);
         
         if (result.rows.length === 0){
             return res.status(404).json({ message: "Product Not Found."})
@@ -67,7 +67,7 @@ app.post('/api/product/', async (req, res) => {
         if(!Array.isArray(keys)){
             return res.status(400).json({message: "error with array"});
         }
-        const query = `SELECT id, product_name, category, price, sku, dimensions, status from Inventory WHERE id = ANY($1)`;  
+        const query = `SELECT id, product_name, category, price, sku, supplier, dimensions, status from Inventory WHERE id = ANY($1)`;  
 
         const result = await pg.query(query, [keys]);
 

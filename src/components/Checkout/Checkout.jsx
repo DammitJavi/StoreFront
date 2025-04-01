@@ -82,7 +82,7 @@ export default function Checkout({ cartTotal }) {
                 <h1 className='pl-2'>Expiration Date</h1>
             </div>
             <div className='text-center'>
-                <button className='border border-textColor rounded-2xl m-2 p-1'>
+                <button className='border border-textColor rounded-2xl m-2 p-1' disabled={ cartTotal === 0}>
                     Place Order
                 </button>
             </div>

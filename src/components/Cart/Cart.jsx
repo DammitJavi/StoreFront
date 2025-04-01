@@ -4,7 +4,7 @@ import trash from '../../assets/images/trash.svg';
 import plus from '../../assets/images/plus.svg';
 import minus from '../../assets/images/minus.svg';
 
-export default function Cart ( { itemCount, setItemCount, isDark, cartItems, setCartItems, cartTotal, setCartTotal}){
+export default function Cart ( { itemCount, setItemCount, isDark, cartItems, setCartItems, setCartTotal}){
 
     const [ itemSet, setItemSet ] = useState([]);
     var total = 0;
@@ -88,10 +88,12 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
             total += (cartItems.get(id) * e.price);
             
             elements.push(
-                <div className='border border-textColor' key={id}>
+                <div className='border border-textColor rounded-md' key={id}>
                     <div className='m-3'>
                         {e.product_name}
                         <br/>
+                        <p className='text-xs'>{"by " + e.supplier}</p>
+
                         {e.price}
                     </div>
                     <div className='flex m-7 border-2 border-checkout rounded-2xl'>
@@ -112,9 +114,9 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
 
     return(
         <div className='flex justify-center'>
-            <div className="text-textColor text-center border border-textColor">
-                <h1>{ isCartEmpty ? "Cart is empty!" : " "}</h1>
-                { isCartEmpty ? "" :  <button onClick={handleClear}>Clear Cart</button>}
+            <div className="text-textColor text-center ">
+                { isCartEmpty ?<h1 className='p-32'> Cart is empty!</h1> : null}
+                { isCartEmpty ? "" :  <button onClick={handleClear} className='underline scale-90 hover:scale-100'>Clear Cart</button>}
                 <div>
                     {myItems()}
                 </div>
