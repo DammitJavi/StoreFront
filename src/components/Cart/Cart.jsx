@@ -94,7 +94,7 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
                         <br/>
                         <p className='text-xs'>{"by " + e.supplier}</p>
 
-                        {e.price}
+                        {"$" + e.price}
                     </div>
                     <div className='flex m-7 border-2 border-checkout rounded-2xl'>
                         <button onClick={() => deleteFromCart(id)}><img src={cartItems.get(id) === 1 ? trash : minus} className={minusClass} /></button>
@@ -125,7 +125,7 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
 
             { !isCartEmpty ? <div className=" bg-navBar rounded-xl border border-textColor absolute inset-y-28 right-2 h-1/6">
                 <div className='m-2'>
-                    <p className='text-textColor'>{ isCartEmpty ? "" : "Total: $" + total.toFixed(2)}</p>
+                    <p className='text-textColor'>{ isCartEmpty ? "" : "Subtotal (items: " + itemCount + "): $" + total.toFixed(2)}</p>
                 </div>
 
                 <div className='m-2'>
