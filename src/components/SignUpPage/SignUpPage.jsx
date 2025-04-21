@@ -51,9 +51,8 @@ export default function SignUpPage(){
                     },
                     body: JSON.stringify(data),
                 });
-                const result = await response.json();
+
                 const statusCode = response.status;
-                console.log("Response: ", result)
                 console.log("StatusCode: ", statusCode)
 
                 if(statusCode === 400){

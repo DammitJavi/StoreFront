@@ -36,8 +36,8 @@ export default function LoginPage ( { setLoggedIn, setUser } ){
                     body: JSON.stringify(data),
                 });
     
-                const result = await response.json();
                 const statusCode = response.status;
+                
                 if(statusCode === 200){
                     setLoggedIn(true);
                     setUserValid(true);

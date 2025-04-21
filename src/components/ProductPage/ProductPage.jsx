@@ -10,8 +10,8 @@ export default function ProductPage( { itemCount, setItemCount, cartItems} ){
     const addToCart = () => {
 
         setItemCount((itemCount+=1));
-        const quantity = !cartItems.has(result.value.id) ? 1 : (cartItems.get(result.value.id) + 1)
-        cartItems.set( result.value.id , quantity );
+        const quantity = !cartItems.has(result.id) ? 1 : (cartItems.get(result.id) + 1)
+        cartItems.set( result.id , quantity );
 
     }
 
@@ -23,6 +23,7 @@ export default function ProductPage( { itemCount, setItemCount, cartItems} ){
                     method: 'GET',
                 });
                 const myData = await response.json();
+
                 setResult(myData);
                 
                 console.log('Server Response', myData);
@@ -40,14 +41,14 @@ export default function ProductPage( { itemCount, setItemCount, cartItems} ){
         return(
             <div className="text-textColor bg-card ">
             <div className='w-48 m-auto border-textColor border-4'> 
-                <h1 className='text-center p-2'> { result.value.product_name} </h1>
+                <h1 className='text-center p-2'> { result.product_name} </h1>
              
                 <div className='text-center m-2'>
-                    <h2> {result.value.category} </h2>
-                    <p> {result.value.price} </p>
-                    <p> {result.value.sku} </p>
-                    <p> {result.value.dimensions} </p>
-                    <p> {result.value.status} </p>
+                    <h2> {result.category} </h2>
+                    <p> {result.price} </p>
+                    <p> {result.sku} </p>
+                    <p> {result.dimensions} </p>
+                    <p> {result.status} </p>
                 </div>
             </div>
             <ul className='text-center m-2 p-2' > 

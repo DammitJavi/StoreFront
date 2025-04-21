@@ -40,17 +40,20 @@ export default function Cart ( { itemCount, setItemCount, isDark, cartItems, set
         const dataFetch = async () => {
             try{
                 const keys = Array.from(cartItems.keys());
+
                 const response = await fetch(`http://localhost:3000/api/product/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({keys}),
+                    body: JSON.stringify(keys),
                 });
 
-                const myInventoryData = await response.json();
+                const myInventoryData = await response.json();                console.log("This is inventory data: ", myInventoryData)
+                
                 const allProduct = Object.values(myInventoryData);
                 setItemSet(allProduct);  
+                
 
             } catch(error){
                 console.error('Error:', error );
